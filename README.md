@@ -15,7 +15,7 @@ https://script.google.com/u/1/home/projects/1M-eczW6yWmGfsY_7ndWqN6nMmHpXAGnJXwj
 ##### URLからQRコードの画像を複数枚発行する
 
 スプレッドシート  
-https://docs.google.com/spreadsheets/d/1YJKHreGig3oTGb5o_wGBntrlR7BUk97xWfZklX7Jhq0/edit?gid=0#gid=0  
+https://docs.google.com/spreadsheets/d/1YJKHreGig3oTGb5o_wGBntrlR7BUk97xWfZklX7Jhq0/edit?gid=0#gid=0
 
 スクリプト  
 https://script.google.com/u/1/home/projects/1mHJ4VQVjrg4sqHV7k3lNEa7RYX_ZgILlfzxry6N20jZkhmy0Wkg5APoG/edit
@@ -40,6 +40,13 @@ function myFunction() {
     console.log('myFunction');
 }
 ```
+
+### 3. 実行する
+
+上部のツールバーの「実行」をクリックする。  
+実行ログに「myFunction」が表示されることが確認できる。
+
+![実行とログの確認](assets/0001.png)
 
 ## TypeScrip を使用して、Apps Script を作成する
 
