@@ -25,6 +25,15 @@ https://script.google.com/u/1/home/projects/1mHJ4VQVjrg4sqHV7k3lNEa7RYX_ZgILlfzx
 スクリプト  
 https://script.google.com/u/1/home/projects/1KzxmU9RAAqptoZ4HcreKQr78DE-wZ07E9VlhOvDfNqhrCkAOEGksGQQ1/edit
 
+#### Apps Scriptを使う理由
+
+エンジニアが使用するならプログラミングをしてメールの自動送信ツールを作るのも良い。
+スプレッドシート（やExcel）の入力方法はその他の入力方法とは全くの別物で、エンジニア以外でもとても効率的にデータを作成することができるツール。
+そのため業務の効率化など
+
+SQLを書かなくてもデータの抽出ができるし、ReDash 用意してあればCSVでダウンロードして好きなようにデータを加工して調査が行える
+
+
 ## コンソール上からプログラムを実装する
 
 ### 1. プロジェクトを作成する
@@ -47,6 +56,28 @@ function myFunction() {
 実行ログに「myFunction」が表示されることが確認できる。
 
 ![実行とログの確認](assets/0001.png)
+
+## メールの下書き一括作成ツールを作成する
+
+### 1. スプレッドシートを新しく作る
+
+[Google ドライブ](https://drive.google.com/drive/home) にアクセスして「新規」から「Googleスプレッドシート」を作成する
+
+### 2. Apps Script を繋ぎこむ
+
+1. 「拡張機能 > Apps Script をクリック
+2. Apps Script のページが開く
+3. サイドメニューの詳細を見てスプレッドシートに紐づいていることが確認で来る
+
+あとからスプレッドシートに紐つけることも、何にも紐付けないで複数のスプレッドシートにアクセスすることも可能。
+
+### 3. 下書き
+
+## 外部APIを利用してみる
+
+```Bash
+curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.sukima.me"
+```
 
 ## TypeScrip を使用して、Apps Script を作成する
 
