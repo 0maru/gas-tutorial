@@ -33,6 +33,11 @@ https://script.google.com/u/1/home/projects/1KzxmU9RAAqptoZ4HcreKQr78DE-wZ07E9Vl
 
 管理画面内に同様の機能を作成するのもいいが、データの編集がメインの場合はスプレッドシートで作成するもの良いと思う。
 
+トリガー機能があるので、特定の時間にプログラムを実行することも可能。  
+[週次ミーティングの資料のバックアップ](https://script.google.com/u/1/home/projects/1M-eczW6yWmGfsY_7ndWqN6nMmHpXAGnJXwjWGsbrnfWR1rbhEY0oA6cv/edit)にはトリガーが仕込まれていて、月曜日になるとバックアップを取るような仕組みになっている。    
+サイドメニューのトリガーから確認することができる。
+![トリガーの例](assets/0004.png)
+
 ## コンソール上からプログラムを実装する
 
 ### 1. プロジェクトを作成する
@@ -91,6 +96,7 @@ function myFunction() {
 ```
 
 #### 4-2. スプレッドシートからデータを取得してメールの下書きを作成する
+
 ```Javascript
 // 先頭行(送信先、件名、本文)は入力する人向けのヒントなので無視する
 for (let i = 1;i < data.length; i++) {
@@ -105,6 +111,7 @@ GmailApp.createDraft(recipient,subject,body);
 ```
 
 ### 全体のコード
+
 ```Javascript
 function myFunction() {
   // スプレッドシートを読み込む
@@ -126,7 +133,11 @@ function myFunction() {
 }
 ```
 
-## 外部APIを利用してみる
+## 外部のAPIを利用してみる
+
+「AppStore のレビューをクロールしてSlackに送信する」などからわかるように、Googleのサービス内で閉じている必要はない。
+
+今回は一例として、PageSpeed Insights を計測する仕組みを作成する
 
 ```Bash
 curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.sukima.me"
