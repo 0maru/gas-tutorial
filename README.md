@@ -27,12 +27,11 @@ https://script.google.com/u/1/home/projects/1KzxmU9RAAqptoZ4HcreKQr78DE-wZ07E9Vl
 
 #### Apps Scriptを使う理由
 
-エンジニアが使用するならプログラミングをしてメールの自動送信ツールを作るのも良い。
-スプレッドシート（やExcel）の入力方法はその他の入力方法とは全くの別物で、エンジニア以外でもとても効率的にデータを作成することができるツール。
-そのため業務の効率化など
+エンジニアが使用するならプログラミングをしてメールの自動送信ツールを作るのも良い。  
+スプレッドシート（やExcel）の入力方法はその他の入力方法とは全くの別物で、エンジニア以外でもとても効率的にデータを作成することができるツール。  
+関数を使うことで簡易的なプログラムのような動作もできる。
 
-SQLを書かなくてもデータの抽出ができるし、ReDash 用意してあればCSVでダウンロードして好きなようにデータを加工して調査が行える
-
+管理画面内に同様の機能を作成するのもいいが、データの編集がメインの場合はスプレッドシートで作成するもの良いと思う。
 
 ## コンソール上からプログラムを実装する
 
@@ -63,7 +62,12 @@ function myFunction() {
 
 [Google ドライブ](https://drive.google.com/drive/home) にアクセスして「新規」から「Googleスプレッドシート」を作成する
 
-### 2. Apps Script を繋ぎこむ
+### 2. 下書きを作成するための元データを作成する
+
+送信先、件名、本文をスプレッドシートに記載する
+![スプレッドシート](assets/0003.png)
+
+### 3. Apps Script を繋ぎこむ
 
 1. 「拡張機能 > Apps Script をクリック
 2. Apps Script のページが開く
@@ -71,7 +75,56 @@ function myFunction() {
 
 あとからスプレッドシートに紐つけることも、何にも紐付けないで複数のスプレッドシートにアクセスすることも可能。
 
-### 3. 下書き
+### 4. 下書きを作成するプログラムを書く
+
+#### 4-1. スプレッドシート読み込みの処理を追加する
+
+```Javascript
+function myFunction() {
+  // スプレッドシートを読み込む
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getActiveSheet();
+  // データを走査するので、スプレッドシート上のの行数・列数を取得する
+  const range = sheet.getDataRange();
+  const data = range.getValues();
+ }
+```
+
+#### 4-2. スプレッドシートからデータを取得してメールの下書きを作成する
+```Javascript
+// 先頭行(送信先、件名、本文)は入力する人向けのヒントなので無視する
+for (let i = 1;i < data.length; i++) {
+// 送信先
+let recipient = data[i][0];
+// 件名
+let subject = data[i][1];
+// 本文
+let body = data[i][2];
+GmailApp.createDraft(recipient,subject,body);
+}
+```
+
+### 全体のコード
+```Javascript
+function myFunction() {
+  // スプレッドシートを読み込む
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getActiveSheet();
+  // データを走査するので、スプレッドシート上のの行数・列数を取得する
+  const range = sheet.getDataRange();
+  const data = range.getValues();
+  // 先頭行(送信先、件名、本文)は入力する人向けのヒントなので無視する
+  for (let i = 1;i < data.length; i++) {
+    // 送信先
+    let recipient = data[i][0];
+    // 件名
+    let subject = data[i][1];
+    // 本文
+    let body = data[i][2];
+    GmailApp.createDraft(recipient,subject,body);
+  }
+}
+```
 
 ## 外部APIを利用してみる
 
